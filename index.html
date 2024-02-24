@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Image Scroll Effect</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .image-container {
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 0 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Dinamis transform */
+        .image-container.hover img {
+            transition-duration: 5s;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="image-list">
+            <div class="image-container">
+                <img src="lugx-gaming.jpg" alt="Image">
+            </div>
+
+            <div class="image-container">
+                <img src="art-factory.jpg" alt="Image">
+            </div>
+
+            <div class="image-container">
+                <img src="lava.jpg" alt="Image">
+            </div>
+        </div>
+    </center>
+    <script type="text/javascript">
+        const imageContainers = document.querySelectorAll(".image-container");
+
+        imageContainers.forEach((imageContainer) => {
+            imageContainer.addEventListener("mouseenter", () => {
+                const img = imageContainer.querySelector("img");
+                const imgHeight = img.offsetHeight;
+                const containerHeight = imageContainer.offsetHeight;
+                const translateYValue = (imgHeight - containerHeight) + "px";
+                img.style.transform = `translateY(-${translateYValue})`;
+                imageContainer.classList.add("hover");
+            });
+
+            imageContainer.addEventListener("mouseleave", () => {
+                imageContainer.querySelector("img").style.transform = "translateY(0)";
+                imageContainer.classList.remove("hover");
+            });
+        });
+    </script>
+</body>
+</html>
